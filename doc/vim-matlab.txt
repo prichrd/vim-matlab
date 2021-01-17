@@ -1,0 +1,80 @@
+*vim-matlab.txt* Matlab development plugin
+*vim-matlab*
+
+==============================================================================
+CONTENTS                                                     *matlab-contents*
+
+  1. Intro....................................|matlab-intro|
+  2. Commands.................................|matlab-commands|
+  3. Mappings.................................|matlab-mappings|
+  4. Settings.................................|matlab-settings|
+
+==============================================================================
+INTRO                                                           *matlab-intro*
+
+Matlab support for Vim. vim-matlab comes with a basic set of functionalities
+allowing easier development in Matlab leveraging its binary.
+
+* Run Matlab scripts with |:MatlabRun|
+* Describe the documentation of a function with |:MatlabDescribe|
+
+==============================================================================
+COMMANDS                                                     *matlab-commands*
+
+                                                                   *:MatabRun*
+:MatlabRun
+
+    Runs the current Matlab script.
+
+                                                              *:MatlabDescribe*
+:MatlabDescribe
+
+    Opens documentation for the word under the cursor.
+
+==============================================================================
+MAPPINGS                                                     *matlab-mappings*
+
+vim-matlab has multiple <Plug> keys which can be used to create key mappings.
+For example, to create a mapping that runs the current Matlab script, create
+the following mapping:
+
+  au FileType matlab nmap <leader>r <Plug>(matlab-run)
+
+Available <Plug> keys are:
+
+                                                                *(matlab-run)*
+
+Runs the current Matlab script.
+
+                                                           *(matlab-describe)*
+
+Opens documentation for the word under the cursor.
+
+==============================================================================
+SETTINGS                                                     *matlab-settings*
+
+                                                      *'g:matlab_binary_path'*
+
+Configures the path of the installed matlab binary. The default value is set
+to `matlab` but could be changed with any binary path location.
+>
+  let g:matlab_binary_path = 'matlab'
+<
+
+                                                     *'g:matlab_binary_flags'*
+
+Configures the binary flags to use when executing a matlab command. The
+default value is set to `-nodisplay -nosplash` but could be changed with any
+valid set of startup flags.
+>
+  let g:matlab_binary_flags = '-nodisplay -nosplash'
+<
+
+                                                   *'g:matlab_doc_max_height'*
+Configures the maximum height of the documentation window displayed by the 
+|:MatlabDescribe| command. The default value is set to `20`.
+>
+  let g:matlab_doc_max_height = 20
+<
+
+vim: ft=help tw=78 et ts=2 sw=2 sts=2 norl
