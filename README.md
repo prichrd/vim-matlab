@@ -4,8 +4,10 @@
 
 This plugin adds Matlab language support for Vim, with the following features:
 
-- Run Matlab scripts with `:MatlabRun`
-- Describe the documentation of a function with `:MatlabDescribe`
+* Start MATLAB with |:MatlabStart|
+* Stop MATLAB with |:MatlabStop|
+* Run MATLAB scripts with |:MatlabRun|
+* Get the documentation of a function with |:MatlabDescribe|
 
 ## Install
 
