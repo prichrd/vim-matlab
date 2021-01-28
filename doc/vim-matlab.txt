@@ -1,4 +1,4 @@
-*vim-matlab.txt* Matlab development plugin
+*vim-matlab.txt* MATLAB development plugin
 *vim-matlab*
 
 ==============================================================================
@@ -12,24 +12,38 @@ CONTENTS                                                     *matlab-contents*
 ==============================================================================
 INTRO                                                           *matlab-intro*
 
-Matlab support for Vim. vim-matlab comes with a basic set of functionalities
-allowing easier development in Matlab leveraging its binary.
+MATLAB support for Vim. vim-matlab comes with a basic set of functionalities
+allowing easier development of MATLAB by leveraging its command line. The process 
+is launched using VIM jobs and displays data in a terminal window.
 
-* Run Matlab scripts with |:MatlabRun|
-* Describe the documentation of a function with |:MatlabDescribe|
+* Start MATLAB with |:MatlabStart|
+* Stop MATLAB with |:MatlabStop|
+* Run MATLAB scripts with |:MatlabRun|
+* Get the documentation of a function with |:MatlabDescribe|
 
 ==============================================================================
 COMMANDS                                                     *matlab-commands*
 
-                                                                   *:MatabRun*
+                                                                 *:MatlabStart*
+:MatlabStart
+
+    Starts the MATLAB process. 
+
+                                                                  *:MatlabStop*
+:MatlabStop
+
+    Stops the MATLAB process.
+
+                                                                   *:MatlabRun*
 :MatlabRun
 
-    Runs the current Matlab script.
+    Runs the current MATLAB script.
 
                                                               *:MatlabDescribe*
 :MatlabDescribe
 
-    Opens documentation for the word under the cursor.
+    Runs the 'help' function for the word under the cursor.
+
 
 ==============================================================================
 MAPPINGS                                                     *matlab-mappings*
@@ -42,13 +56,21 @@ the following mapping:
 
 Available <Plug> keys are:
 
+                                                              *(matlab-start)*
+
+Starts the MATLAB process. 
+
+                                                               *(matlab-stop)*
+
+Stops the MATLAB process. 
+
                                                                 *(matlab-run)*
 
-Runs the current Matlab script.
+Runs the current MATLAB script.
 
                                                            *(matlab-describe)*
 
-Opens documentation for the word under the cursor.
+Runs the 'help' function for the word under the cursor.
 
 ==============================================================================
 SETTINGS                                                     *matlab-settings*
@@ -64,17 +86,26 @@ to `matlab` but could be changed with any binary path location.
                                                      *'g:matlab_binary_flags'*
 
 Configures the binary flags to use when executing a matlab command. The
-default value is set to `-nodisplay -nosplash` but could be changed with any
+default value is set to `-nodesktop -nosplash` but could be changed with any
 valid set of startup flags.
 >
-  let g:matlab_binary_flags = '-nodisplay -nosplash'
+  let g:matlab_binary_flags = '-nodesktop -nosplash'
 <
+                                                       *'g:matlab_auto_start'*
 
-                                                   *'g:matlab_doc_max_height'*
-Configures the maximum height of the documentation window displayed by the 
-|:MatlabDescribe| command. The default value is set to `20`.
+Configures whether the MATLAB process should start automatically when
+issuing a command to it or not. The default value is `1`. If auto
+start is disabled by default, the |:MatlabStart| command needs to be issued
+before using any MATLAB commands.
 >
-  let g:matlab_doc_max_height = 20
+  let g:matlab_auto_start = 1
 <
+                                                        *'g:matlab_term_mode'*
 
+Configures the terminal window spawn process. The default value is `vsplit` 
+but could be replaced with any valid operation to create a window. Other 
+values could be: `split`, `tabe`, etc. 
+>
+  let g:matlab_term_mode = 'vsplit'
+<
 vim: ft=help tw=78 et ts=2 sw=2 sts=2 norl

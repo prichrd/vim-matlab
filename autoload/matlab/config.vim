@@ -3,9 +3,13 @@ function! matlab#config#BinaryPath() abort
 endfunction
 
 function! matlab#config#BinaryFlags() abort
-  return get(g:, 'matlab_binary_flags', '-nodisplay -nosplash')
+  return get(g:, 'matlab_binary_flags', '-nodesktop -nosplash')
 endfunction
 
-function! matlab#config#DocMaxHeight() abort
-  return get(g:, 'matlab_doc_max_height', 20)
+function! matlab#config#AutoStart() abort
+  return get(g:, 'matlab_auto_start', 1)
+endfunction
+
+function! matlab#config#TermMode() abort
+  return get(g:, 'matlab_term_mode', 'vsplit')
 endfunction

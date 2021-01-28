@@ -1,54 +1,50 @@
-let s:buf_nr = -1
+let s:job_id = -1
+let s:job_buf_id = -1
+
+function! s:matlab_dispatch(cmd)
+  if matlab#config#AutoStart() ==# 1
+    call matlab#cmd#Start()
+  endif
+  if s:job_id !=# -1
+    call chansend(s:job_id, a:cmd . "\r")
+  else
+    echo "MATLAB is not running."
+  endif
+endfunction
+
+function! matlab#cmd#Start() abort
+  function! OnExit(job_id, data, event)
+    silent! exec "bdelete! " . s:job_buf_id
+    let s:job_id = -1
+    let s:job_buf_id = -1
+  endfunction
+
+  if s:job_id ==# -1
+    execute matlab#config#TermMode() . " __matlab_term__"
+    set nonumber
+    setlocal nobuflisted
+    setlocal nocursorline
+    setlocal nocursorcolumn
+    let s:job_id = termopen(
+          \matlab#config#BinaryPath() . " " . matlab#config#BinaryFlags(),
+          \{'pty': 1,
+          \'on_exit': 'OnExit'})
+    let s:job_buf_id = bufnr()
+    normal! G 
+    exe "wincmd p"
+  end
+endfunction
+
+function! matlab#cmd#Stop() abort
+  if s:job_id !=# -1
+    call jobstop(s:job_id)
+  end
+endfunction
 
 function! matlab#cmd#Run() abort
-  silent !clear
-  execute "!" . matlab#config#BinaryPath() . " " . matlab#config#BinaryFlags() . " -r \"run('" . expand('%') . "'); exit;\" | tail +11"
+  call s:matlab_dispatch("run('" . expand('%') . "')")
 endfunction
 
 function! matlab#cmd#Describe() abort
-  silent !clear
-  let content = system(matlab#config#BinaryPath() . " " . matlab#config#BinaryFlags() . " -r \"help '" . expand("<cword>") . "'; exit;\" | tail +11")
-
-  let is_visible = bufexists(s:buf_nr) && bufwinnr(s:buf_nr) != -1
-  if !bufexists(s:buf_nr)
-    execute "new"
-    sil file `="[matlabdoc]"`
-    let s:buf_nr = bufnr('%')
-  elseif bufwinnr(s:buf_nr) == -1
-    execute "split"
-    execute s:buf_nr . 'buffer'
-  elseif bufwinnr(s:buf_nr) != bufwinnr('%')
-    execute bufwinnr(s:buf_nr) . 'wincmd w'
-  endif
-
-  if !is_visible
-    let max_height = matlab#config#DocMaxHeight()
-    let content_height = len(split(content, "\n"))
-    if content_height > max_height
-      exe 'resize ' . max_height
-    else
-      exe 'resize ' . content_height
-    endif
-  endif
-
-  setlocal filetype=matlabdoc
-  setlocal bufhidden=delete
-  setlocal buftype=nofile
-  setlocal noswapfile
-  setlocal nobuflisted
-  setlocal nocursorline
-  setlocal nocursorcolumn
-  setlocal iskeyword+=:
-  setlocal iskeyword-=-
-
-  setlocal modifiable
-  %delete _
-  call append(0, split(content, "\n"))
-  sil $delete _
-  setlocal nomodifiable
-  sil normal! gg
-
-  noremap <buffer> <silent> <CR> :<C-U>close<CR>
-  noremap <buffer> <silent> <Esc> :<C-U>close<CR>
-  nnoremap <buffer> <silent> <Esc>[ <Esc>[
+  call s:matlab_dispatch("help '" . expand("<cword>") . "'")
 endfunction
