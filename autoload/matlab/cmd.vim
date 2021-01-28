@@ -41,6 +41,10 @@ function! matlab#cmd#Stop() abort
   end
 endfunction
 
+function! matlab#cmd#Command(command) abort
+  call s:matlab_dispatch(a:command)
+endfunction
+
 function! matlab#cmd#Run() abort
   call s:matlab_dispatch("run('" . expand('%') . "')")
 endfunction

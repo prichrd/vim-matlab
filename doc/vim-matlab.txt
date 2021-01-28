@@ -18,6 +18,7 @@ is launched using VIM jobs and displays data in a terminal window.
 
 * Start MATLAB with |:MatlabStart|
 * Stop MATLAB with |:MatlabStop|
+* Run MATLAB commands with |:Matlab|
 * Run MATLAB scripts with |:MatlabRun|
 * Get the documentation of a function with |:MatlabDescribe|
 
@@ -33,6 +34,11 @@ COMMANDS                                                     *matlab-commands*
 :MatlabStop
 
     Stops the MATLAB process.
+
+                                                                      *:Matlab*
+:Matlab <command>
+
+    Runs the provided matlab command.
 
                                                                    *:MatlabRun*
 :MatlabRun
