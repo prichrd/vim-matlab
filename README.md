@@ -16,7 +16,8 @@ This plugin adds Matlab language support for Vim, with the following features:
 
 ## Install
 
-vim-matlab follows the standard runtime package structure. It is possible to install it with all popular package managers:
+vim-matlab requires at least Vim 8.0.1453 or Neovim 0.4.0 and follows the standard runtime package structure. 
+It is possible to install it with all popular package managers:
 
 * [Vim 8 packages](http://vimhelp.appspot.com/repeat.txt.html#packages)
   * `git clone https://github.com/prichrd/vim-matlab.git ~/.vim/pack/plugins/start/vim-matlab`

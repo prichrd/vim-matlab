@@ -10,6 +10,6 @@ function! matlab#config#AutoStart() abort
   return get(g:, 'matlab_auto_start', 1)
 endfunction
 
-function! matlab#config#TermMode() abort
-  return get(g:, 'matlab_term_mode', 'vsplit')
+function! matlab#config#SplitVert() abort
+  return get(g:, 'matlab_split_vert', 0)
 endfunction

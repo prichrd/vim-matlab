@@ -25,31 +25,30 @@ is launched using VIM jobs and displays data in a terminal window.
 ==============================================================================
 COMMANDS                                                     *matlab-commands*
 
-                                                                 *:MatlabStart*
+                                                                *:MatlabStart*
 :MatlabStart
 
     Starts the MATLAB process. 
 
-                                                                  *:MatlabStop*
+                                                                 *:MatlabStop*
 :MatlabStop
 
     Stops the MATLAB process.
 
-                                                                      *:Matlab*
+                                                                     *:Matlab*
 :Matlab <command>
 
     Runs the provided matlab command.
 
-                                                                   *:MatlabRun*
+                                                                  *:MatlabRun*
 :MatlabRun
 
     Runs the current MATLAB script.
 
-                                                              *:MatlabDescribe*
+                                                             *:MatlabDescribe*
 :MatlabDescribe
 
     Runs the 'help' function for the word under the cursor.
-
 
 ==============================================================================
 MAPPINGS                                                     *matlab-mappings*
@@ -106,12 +105,11 @@ before using any MATLAB commands.
 >
   let g:matlab_auto_start = 1
 <
-                                                        *'g:matlab_term_mode'*
+                                                       *'g:matlab_split_vert'*
 
-Configures the terminal window spawn process. The default value is `vsplit` 
-but could be replaced with any valid operation to create a window. Other 
-values could be: `split`, `tabe`, etc. 
+Configures the spawned terminal window split orientation. The default value 
+is `0` (horizontal split) but could be set to `1` (vertical split). 
 >
-  let g:matlab_term_mode = 'vsplit'
+  let g:matlab_split_vert = 0
 <
 vim: ft=help tw=78 et ts=2 sw=2 sts=2 norl
